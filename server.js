@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -25,7 +24,6 @@ mongoose
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-
 // swagger
 const swaggerOptions = {
   definition: {                  
@@ -36,7 +34,7 @@ const swaggerOptions = {
       description: 'API for managing pets for adoption',
     },
     servers: [
-      { url: 'https://petadaption-y8ow.onrender.com' }
+      { url: process.env.API_URL || 'https://petadaption-y8ow.onrender.com' }
     ],
   },
   apis: ['./routes/*.js'],       
@@ -45,20 +43,17 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-
-//routes
+// routes
 app.use('/api/v1/pets', petRoutes);
-
 
 // root
 app.get('/', (req, res) => {
   res.send('Welcome to the Pet Adoption API');
 });
 
-
 // start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-  console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
+  console.log(`Server running at ${process.env.API_URL || `http://localhost:${PORT}`}`);
+  console.log(`Swagger docs at ${process.env.API_URL || `http://localhost:${PORT}`}/api-docs`);
 });
