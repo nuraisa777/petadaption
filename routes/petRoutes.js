@@ -60,7 +60,6 @@ router.get('/search', petController.searchPets);
  *               gender: { type: string }
  *               status: { type: string }
  *               description: { type: string }
- *               pictureURL: { type: string }
  *     responses:
  *       201:
  *         description: Pet created
