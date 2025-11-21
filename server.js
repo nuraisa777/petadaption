@@ -36,7 +36,7 @@ const swaggerOptions = {
       description: 'API for managing pets for adoption',
     },
     servers: [
-      { url: 'https://petadaption-y8ow.onrender.com/' }
+      { url: 'https://petadaption-y8ow.onrender.com' }
     ],
   },
   apis: ['./routes/*.js'],       
